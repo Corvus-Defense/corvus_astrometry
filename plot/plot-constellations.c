@@ -738,7 +738,7 @@ int main(int argc, char** args) {
             pl_remove_index_range(brightstars, Nbright, pl_size(brightstars)-Nbright);
         }
 
-        FILE* outcsv = fopen("demo/brightstars.csv", "w");
+        FILE* outcsv = fopen("./brightstars.csv", "w");
         if (!outcsv) {
             fprintf(stderr, "Error: could not open brightstars.csv for writing\n");
             exit(1);
