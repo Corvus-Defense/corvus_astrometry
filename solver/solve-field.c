@@ -604,6 +604,23 @@ static void after_solved(augment_xylist_t* axy,
         double det = sip_det_cd(&wcs);
         logmsg("Field parity: %s\n", (det < 0 ? "pos" : "neg"));
 
+        
+        FILE* csv = fopen("field_info.csv", "a");
+        if (!csv) {
+            ERROR("Could not open field_info.csv for writing!");
+        } else {
+            // Write header if file is new
+            fseek(csv, 0, SEEK_END);
+            if (ftell(csv) == 0) {
+                fprintf(csv, "image_file,ra_deg,dec_deg,field_width_deg,field_height_deg,rotation_deg\n");
+            }
+
+            fprintf(csv, "\"%s\",%.6f,%.6f,%.6f,%.6f,%.3f\n",
+                    axy->imagefn ? axy->imagefn : axy->xylsfn,
+                    ra, dec, fieldw, fieldh, orient);
+            fclose(csv);
+        }
+
     } else {
         logmsg("Did not solve (or no WCS file was written).\n");
     }
