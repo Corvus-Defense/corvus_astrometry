@@ -14,7 +14,8 @@ KEEP_FILES = {
     "configure",
     "setup-libkd.py",
     "setup.py",
-    "clean_up.py"
+    "clean_up.py",
+    "requirements.txt"
 }
 
 def clean_up(dir_to_clean, keep_files):
